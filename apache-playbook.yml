@@ -1,0 +1,15 @@
+- name: configure apache on ubuntu server
+  hosts: ubuntuclients
+  tasks:
+    - name: Install latest version of Apache
+      apt:
+        name: apache2
+        state: present
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        state: latest
+    - name: Copy index test page
+      copy:
+        content: "Hello World from Hera using ansible playbook for Ubuntu."
+        dest: /var/www/html/index.html
