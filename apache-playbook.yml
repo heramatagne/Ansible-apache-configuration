@@ -13,3 +13,18 @@
       copy:
         content: "Hello World from Hera using ansible playbook for Ubuntu."
         dest: /var/www/html/index.html
+- name: configure apache on ubuntu server
+  hosts: ubuntuclients
+  tasks:
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+        repo: 'https://github.com/heramatagne/Ansible-apache-configuration.git'
+        dest: /srv/checkout
+        version: release-0.22
+    - name: Update repository 
+      apt_repository:
+        repo: 'ppa:git-core/ppa'
+        state: present           
